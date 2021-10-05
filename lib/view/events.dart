@@ -10,7 +10,7 @@ class EventsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Current Events"),
+        title: Text("Upcoming Events"),
         automaticallyImplyLeading: false, // removes back button
       ),
       body: FutureBuilder(

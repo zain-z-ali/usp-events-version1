@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('USP Events'),
       ),
-      body: Text('home'),
+      body: EventsPage(),
     );
   }
 }

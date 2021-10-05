@@ -17,7 +17,7 @@ class Speaker {
 
   factory Speaker.fromJson(Map<String, dynamic> json) {
     return Speaker(
-      speakerID: json['id'] as int,
+      speakerID: json['speaker_id'] as int,
       speakerName: json['speaker_name'] as String,
       speakerProfession: json['speaker_profession'] as String,
       speakerOrg: json['speaker_org'] as String,
