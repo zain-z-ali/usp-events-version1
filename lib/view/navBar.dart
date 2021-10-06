@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:version1_0/main.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
 import 'package:version1_0/view/eventInfo.dart';
+import 'package:version1_0/view/event_theme.dart';
+import 'package:version1_0/view/eventforum.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/speaker.dart';
 
@@ -18,6 +20,16 @@ void _navigateToEventInfo(BuildContext context) {
 void _navigateToSpeakers(BuildContext context) {
   Navigator.of(context)
       .push(MaterialPageRoute(builder: (context) => PostsPage()));
+}
+
+void _navigateToEventForum(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => EventForum()));
+}
+
+void _navigateToEventsThemePage(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => EventsThemePage()));
 }
 
 //String profilePic
@@ -72,12 +84,12 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.palette),
             title: Text('Event Theme'),
-            onTap: () => null,
+            onTap: () => {_navigateToEventsThemePage(context)},
           ),
           ListTile(
             leading: Icon(Icons.forum_rounded),
             title: Text('Forum'),
-            onTap: () => null,
+            onTap: () => {_navigateToEventForum(context)},
           ),
           ListTile(
             leading: Icon(Icons.feed_rounded),

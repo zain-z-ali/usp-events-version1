@@ -23,9 +23,8 @@ class HttpService_event {
 }
 
 class HttpService_eventSpecific {
-  final String eventsURL = "http://10.0.2.2:8000/api/events/2";
-
-  Future<Event> getSpecificEvents() async {
+  Future<Event> getSpecificEvents(int id) async {
+    String eventsURL = "http://10.0.2.2:8000/api/events/$id";
     http.Response res = await http.get(Uri.parse(eventsURL));
 
     if (res.statusCode == 200) {

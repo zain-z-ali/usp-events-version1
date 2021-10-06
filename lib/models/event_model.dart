@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-class Event {
-  final int eventID;
+class Event with ChangeNotifier {
+  int eventID;
   final String eventName;
   final String eventTime;
   final String eventVenue;
@@ -32,5 +32,10 @@ class Event {
       eventEndDate: json['event_end_date'] as String,
       eventInformation: json['even_info'] as String,
     );
+  }
+
+  void fetchEventID(int newID) {
+    eventID = newID;
+    notifyListeners();
   }
 }

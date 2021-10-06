@@ -4,7 +4,12 @@ import 'package:version1_0/services/httpService_events.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/navBar.dart';
 
-class EventInfo extends StatelessWidget {
+class EventInfo extends StatefulWidget {
+  @override
+  _EventInfoState createState() => _EventInfoState();
+}
+
+class _EventInfoState extends State<EventInfo> {
   final HttpService_eventSpecific httpService = HttpService_eventSpecific();
 
   @override
@@ -15,7 +20,7 @@ class EventInfo extends StatelessWidget {
           title: Text('Event Info'),
         ),
         body: FutureBuilder<Event>(
-          future: httpService.getSpecificEvents(),
+          future: httpService.getSpecificEvents(1),
           builder: (BuildContext context, AsyncSnapshot<Event> snapshot) {
             if (snapshot.hasData) {
               Event? events = snapshot.data;
