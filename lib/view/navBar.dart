@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:version1_0/main.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
+import 'package:version1_0/view/eventInfo.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/speaker.dart';
+
+void _navigateToHomePage(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => MyHomePage()));
+}
 
 void _navigateToEventInfo(BuildContext context) {
   Navigator.of(context)
@@ -52,6 +59,12 @@ class NavBar extends StatelessWidget {
           ),
           ListTile(
             /// first tile
+            leading: Icon(Icons.home),
+            title: Text('Homepage | Switch Event'),
+            onTap: () => {_navigateToHomePage(context)},
+          ),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.info),
             title: Text('Event Info'),
             onTap: () => {_navigateToEventInfo(context)},

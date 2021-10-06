@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/models/event_model.dart';
+import 'package:version1_0/view/navBar.dart';
 
 class EventDetail extends StatelessWidget {
   final Event event;
@@ -9,6 +10,7 @@ class EventDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavBar(),
         appBar: AppBar(
           title: Text("Event Details"),
         ),

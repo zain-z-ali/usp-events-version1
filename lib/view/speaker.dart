@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/httpService_speaker.dart';
 import 'package:version1_0/models/speaker_model.dart';
 import 'package:version1_0/view/speaker_detail.dart';
+import 'package:version1_0/view/navBar.dart';
 
 class PostsPage extends StatelessWidget {
   final HttpService_speaker httpService = HttpService_speaker();
@@ -9,6 +10,7 @@ class PostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavBar(),
       appBar: AppBar(
         title: Text("Speakers"),
       ),

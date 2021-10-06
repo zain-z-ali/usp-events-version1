@@ -23,19 +23,15 @@ class HttpService_event {
 }
 
 class HttpService_eventSpecific {
-  final String eventsURL = "http://10.0.2.2:8000/api/events/1";
+  final String eventsURL = "http://10.0.2.2:8000/api/events/2";
 
   Future<Event> getSpecificEvents() async {
     http.Response res = await http.get(Uri.parse(eventsURL));
 
     if (res.statusCode == 200) {
-      dynamic body = jsonDecode(res.body);
-      Event event = body
-          .map(
-            (dynamic item) => Event.fromJson(item),
-          )
-          .toList();
-      return event;
+      Event data = Event.fromJson(jsonDecode(res.body));
+      //print(data.eventName);
+      return data;
     } else {
       throw Exception("Unable to retrieve event info.");
     }
