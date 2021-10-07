@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 
 class Event {
   final int eventID;
@@ -23,7 +22,7 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      eventID: json['id'] as int,
+      eventID: json['event_id'] as int,
       eventName: json['event_name'] as String,
       eventTime: json['event_time'] as String,
       eventVenue: json['event_venue'] as String,

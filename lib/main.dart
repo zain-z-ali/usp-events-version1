@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+// import 'package:version1_0/view/SplashPage.dart';
+import 'package:version1_0/view/login_page.dart';
 import 'package:version1_0/view/navBar.dart';
-//import 'package:version1_0/models/event_model.dart';
+// import 'package:version1_0/models/event_model.dart';
 import '../services/httpService_events.dart';
-import 'package:version1_0/view/events.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
-      home: MyHomePage(),
+      home: LoginPage(),
     );
   }
 }
