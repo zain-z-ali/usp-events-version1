@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:version1_0/view/Gallery.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
 import 'package:version1_0/view/feedback.dart';
@@ -6,6 +7,8 @@ import 'package:version1_0/view/map.dart';
 import 'package:version1_0/view/newsInfo.dart'; //news info page display
 // import 'package:version1_0/view/news.dart';
 import 'package:version1_0/view/speaker.dart';
+
+
 
 void _navigateToEventInfo(BuildContext context) {
   Navigator.of(context)
@@ -30,6 +33,11 @@ void _navigateToMap(BuildContext context) {
 void _navigateToFeedback(BuildContext context) {
   Navigator.of(context)
       .push(MaterialPageRoute(builder: (context) => UI22()));
+}
+
+void _navigateToGallery(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => Gallery()));
 }
 
 
@@ -109,7 +117,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.image),
             title: Text('Gallery'),
-            onTap: () => null,
+            onTap: () => {_navigateToGallery(context)},
           ),
           ListTile(
             leading: Icon(Icons.notifications),

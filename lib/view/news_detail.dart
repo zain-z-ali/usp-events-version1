@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:version1_0/models/news_model.dart';
+// import 'package:version1_0/models/news_model.dart';
+import 'package:version1_0/models/newsfeed_model.dart';
 
 class NewsDetail extends StatelessWidget {
-  final News news;
+  final Newsfeed news;
 
   NewsDetail({required this.news});
 
@@ -26,11 +27,11 @@ class NewsDetail extends StatelessWidget {
                         title: Text("News Title"),
                         subtitle: Text(news.newsName),
                       ),
-                      ListTile(
+                     /*  ListTile(
                         title: Text("Details"),
                         subtitle: Text(
                             "Description: ${news.newsDescription} \nKeywords: ${news.newsKeyword} "),
-                      ),
+                      ), */
                       ListTile(
                         title: Text("More Info"),
                         subtitle: Text(news.newsContent),
