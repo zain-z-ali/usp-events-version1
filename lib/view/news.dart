@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/view/news_detail.dart';
-import 'package:version1_0/models/news_model.dart';
-import '../services/httpService_news.dart';
+// import 'package:version1_0/models/news_model.dart';
+// import '../services/httpService_news.dart';
+import 'package:version1_0/models/newsfeed_model.dart';
+import '../services/httpService_newsfeed.dart';
 
 class NewsPage extends StatelessWidget {
-  final HttpService_news httpService = HttpService_news();
+  final HttpService_newsfeed httpService = HttpService_newsfeed();
 
   @override
   Widget build(BuildContext context) {
@@ -14,19 +16,19 @@ class NewsPage extends StatelessWidget {
         automaticallyImplyLeading: false, // removes back button
       ),
       body: FutureBuilder(
-        future: httpService.getNews(),
-        builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
+        future: httpService.getNewsfeed(),
+        builder: (BuildContext context, AsyncSnapshot<List<Newsfeed>> snapshot) {
           if (snapshot.hasData) {
-            List<News>? news = snapshot.data;
+            List<Newsfeed>? news = snapshot.data;
             return ListView(
               children: news!
                   .map(
-                    (News news) => Card(
+                    (Newsfeed news) => Card(
                         color: Colors.lightBlue[50],
                         child: ListTile(
                           title: Text(news.newsName),
                           subtitle: Text(
-                              '${news.newsDescription} \nKeywords ${news.newsKeyword}'),
+                              '${news.newsDescription} \nContent ${news.newsContent}'),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => NewsDetail(
