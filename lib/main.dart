@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:version1_0/view/SplashPage.dart';
 import 'package:version1_0/view/login_page.dart';
 import 'package:version1_0/view/navBar.dart';
-import 'package:version1_0/view/user_preferances.dart';
+import 'package:version1_0/view/user_preferences.dart';
 // import 'package:version1_0/models/event_model.dart';
 import '../services/httpService_events.dart';
 
@@ -16,6 +16,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final user = UserPreferences.getUser();
     return MaterialApp(
       theme: ThemeData(

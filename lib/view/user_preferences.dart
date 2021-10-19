@@ -12,7 +12,7 @@ class UserPreferences {
     name: 'Sarah Abs',
     email: 'sarah.abs@gmail.com',
     about:
-        'Certified Personal Trainer and Nutritionist with years of experience in creating effective diets and training plans focused on achieving individual customers goals in a smooth way.',
+        'I earned my bachelors degree in biology from USP and an MS in environmental science and policy at the University of Chicago. Before coming to the University of The South Pacific, I spent time working on environmental and clean energy issues both in the government and nonprofit sectors.',
   );
 
   static Future init() async =>

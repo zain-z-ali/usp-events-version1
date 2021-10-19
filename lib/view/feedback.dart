@@ -50,15 +50,15 @@ class _UI22State extends State<UI22> {
                 });
               },
             ),
-            GestureDetector(
-              child: buildCheckItem(
-                  title: "Events related", isSelected: isTypeSelected[1]),
-              onTap: () {
-                setState(() {
-                  isTypeSelected[1] = !isTypeSelected[1];
-                });
-              },
-            ),
+            // GestureDetector(
+            //   child: buildCheckItem(
+            //       title: "Events related", isSelected: isTypeSelected[1]),
+            //   onTap: () {
+            //     setState(() {
+            //       isTypeSelected[1] = !isTypeSelected[1];
+            //     });
+            //   },
+            // ),
             GestureDetector(
               child: buildCheckItem(
                   title: "Personal profile", isSelected: isTypeSelected[2]),
@@ -90,7 +90,7 @@ class _UI22State extends State<UI22> {
               height: 10.0,
             ),
             buildFeedbackForm(),
-            SizedBox(height: 10.0),
+            SizedBox(height: 8.0),
             buildNumberField(),
             Spacer(),
             Row(

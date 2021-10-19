@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/view/feedback.dart';
 import 'package:version1_0/view/profileEdit.dart';
-import 'package:version1_0/view/profileSetting.dart';
+// import 'package:version1_0/view/profileSetting.dart';
 import 'package:version1_0/widget/button_widget.dart';
-import 'package:version1_0/view/user_preferances.dart';
+import 'package:version1_0/view/user_preferences.dart';
 import 'package:version1_0/models/user.dart';
 import 'package:version1_0/widget/profile_widget.dart';
 
