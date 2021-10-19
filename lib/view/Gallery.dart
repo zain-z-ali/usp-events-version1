@@ -11,7 +11,7 @@ class Gallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.lightBlue[50],
+          backgroundColor: Colors.blueGrey,
           title: Text("Gallery"),
         ),
         body: Container(
