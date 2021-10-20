@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:version1_0/models/event_model.dart';
+import 'package:version1_0/view/events.dart';
 
 class HttpService_event {
   final String eventsURL = "http://10.0.2.2:8000/api/events";
@@ -23,8 +24,16 @@ class HttpService_event {
 }
 
 class HttpService_eventSpecific {
-  Future<Event> getSpecificEvents(int id) async {
-    String eventsURL = "http://10.0.2.2:8000/api/events/$id";
+  int event_id = globalEventId;
+
+  String eventsURL = "http://10.0.2.2:8000/api/events";
+
+  HttpService_eventSpecific() {
+    this.eventsURL = "http://10.0.2.2:8000/api/events/$event_id";
+  }
+
+  Future<Event> getSpecificEvents() async {
+    //String eventsURL = "http://10.0.2.2:8000/api/events/$id";
     http.Response res = await http.get(Uri.parse(eventsURL));
 
     if (res.statusCode == 200) {

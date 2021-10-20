@@ -3,7 +3,14 @@ import 'package:version1_0/view/event_detail.dart';
 import 'package:version1_0/models/event_model.dart';
 import '../services/httpService_events.dart';
 
-class EventsPage extends StatelessWidget {
+int globalEventId = 0;
+
+class EventsPage extends StatefulWidget {
+  @override
+  _EventsPageState createState() => _EventsPageState();
+}
+
+class _EventsPageState extends State<EventsPage> {
   final HttpService_event httpService = HttpService_event();
 
   @override
@@ -27,13 +34,18 @@ class EventsPage extends StatelessWidget {
                           title: Text(event.eventName),
                           subtitle: Text(
                               '${event.eventTheme} \nStarts ${event.eventStartDate} - Ends ${event.eventEndDate}'),
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => EventDetail(
-                                event: event,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => EventDetail(
+                                  event: event,
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                            setState(() {
+                              globalEventId = event.eventID;
+                            });
+                          },
                         )),
                   )
                   .toList(),

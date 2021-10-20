@@ -4,6 +4,8 @@ import 'package:version1_0/models/speaker_model.dart';
 import 'package:version1_0/view/speaker_detail.dart';
 import 'package:version1_0/view/navBar.dart';
 
+import 'events.dart';
+
 class PostsPage extends StatelessWidget {
   final HttpService_speaker httpService = HttpService_speaker();
 
@@ -17,7 +19,10 @@ class PostsPage extends StatelessWidget {
       body: FutureBuilder(
         future: httpService.getSpeakers(),
         builder: (BuildContext context, AsyncSnapshot<List<Speaker>> snapshot) {
-          if (snapshot.hasData) {
+          if (globalEventId == 0) {
+            return Text(
+                "No event selected. Please select an event on the Home page to view details");
+          } else if (snapshot.hasData) {
             List<Speaker>? speakers = snapshot.data;
             return ListView(
               children: speakers!
