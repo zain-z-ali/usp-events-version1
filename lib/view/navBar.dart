@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/speaker.dart';
+import 'package:version1_0/view/schedule.dart';
+import 'package:version1_0/view/scheduleInfo.dart';
 
 void _navigateToEventInfo(BuildContext context) {
   Navigator.of(context)
@@ -11,6 +13,11 @@ void _navigateToEventInfo(BuildContext context) {
 void _navigateToSpeakers(BuildContext context) {
   Navigator.of(context)
       .push(MaterialPageRoute(builder: (context) => PostsPage()));
+}
+
+void _navigateToScheduleInfo(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => ScheduleInfo()));
 }
 
 //String profilePic
@@ -74,7 +81,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.schedule_rounded),
             title: Text('Schedule'),
-            onTap: () => null,
+            onTap: () => {_navigateToScheduleInfo(context)},
           ),
           ListTile(
             leading: Icon(Icons.poll_rounded),
