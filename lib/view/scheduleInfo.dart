@@ -42,41 +42,40 @@ class _MyHomePageState extends State<MyHomePage> {
     _scheduleList.add(new Schedule(
         description:
             "Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devicesOptimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices",
-        theme: "autonomous navigation in GPS denied",
+        theme: "Session 1 - Traffic and Vehicular Automation",
         time: "11:00 am to 11:15 am",
-        room: "Ratumakutu 2"));
+        room: "Ratumakutu 1"));
     _scheduleList.add(new Schedule(
         description:
-            "Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices",
-        theme: "autonomous navigation in GPS denied",
+            "(SHORT) A Light-weight Context-Aware Self-Attention model for Skin Lesion Segmentation",
+        theme: "Session 2 - Biometrics and Bioformatics",
         time: "11:00 am to 11:15 am",
         room: "Ratumakutu 3"));
     _scheduleList.add(new Schedule(
         description:
-            "Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices",
-        theme: "autonomous navigation in GPS denied",
+            "Explaining Black-box Machine Learning Models Using Interpretable Surrogates",
+        theme: "Session 3 Learning",
         time: "11:00 am to 11:15 am",
         room: "Ratumakutu 4"));
 
     _scheduleList.add(new Schedule(
         description:
-            "Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices",
-        theme: "autonomous navigation in GPS denied",
+            "The development of Hypersonic - Sub Orbital Weaponry and the Future of Space Warfare",
+        theme: "Session 4 Space Force",
         time: "11:00 am to 11:15 am",
         room: "Ratumakutu 5"));
 
     _scheduleList.add(new Schedule(
         description:
-            "Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices",
-        theme: "autonomous navigation in GPS denied",
+            " The Global Silicon Chip Shortage and the Unforseen Impact on National Security ",
+        theme: "Session 5 National Defense",
         time: "11:00 am to 11:15 am",
         room: "Ratumakutu 6"));
 
     _scheduleList.add(new Schedule(
         description:
-            "Optimizing DNN architectures for high speed autonomous navigation in GPS denied Environments on edge devices",
-        theme:
-            "autonomous navigation in GPS denied autonomous navigation in GPS denied adwdawda",
+            "AI (Artificial Intelligence) The Saving Grace and the downfall of the Human Species",
+        theme: "Session 6 AI",
         time: "11:00 am to 11:15 am",
         room: "Ratumakutu 7"));
   }
@@ -103,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                     fontSize: 25)))),
-                    Text("Monday 3rd August 2020", //"Monday 3rd August 2020"
+                    Text("Thursday 21st October 2021",
                         style: TextStyle(color: Colors.white, fontSize: 15)),
                   ])),
         ),
@@ -140,10 +139,12 @@ class _MyHomePageState extends State<MyHomePage> {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.black, blurRadius: 10, offset: Offset(-4, 5))
+                color: Colors.blueGrey.shade100,
+                blurRadius: 3,
+                offset: Offset(-4, 5))
           ],
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: BorderRadius.all(Radius.circular(5))),
       // event details here
       padding: EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 10.0),
       margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
