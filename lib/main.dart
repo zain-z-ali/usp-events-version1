@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:version1_0/view/SplashPage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:version1_0/view/SplashPage.dart';
 import 'package:version1_0/view/login_page.dart';
+// import 'package:version1_0/view/SplashPage.dart'
 import 'package:version1_0/view/navBar.dart';
 import 'package:version1_0/view/user_preferences.dart';
 // import 'package:version1_0/models/event_model.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
     final user = UserPreferences.getUser();
     return MaterialApp(
       theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         primarySwatch: Colors.blueGrey,
         dividerTheme: DividerThemeData(
           thickness: 2,
