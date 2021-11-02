@@ -6,6 +6,7 @@ import 'package:version1_0/view/eventInfo.dart'; //event info page display
 import 'package:version1_0/view/feedback.dart';
 import 'package:version1_0/view/map.dart';
 import 'package:version1_0/view/newsInfo.dart'; //news info page display
+import 'package:version1_0/view/polls.dart';
 // import 'package:version1_0/view/news.dart';
 import 'package:version1_0/view/speaker.dart';
 //import 'package:version1_0/view/schedule.dart';
@@ -40,6 +41,11 @@ void _navigateToFeedback(BuildContext context) {
 void _navigateToScheduleInfo(BuildContext context) {
   Navigator.of(context)
       .push(MaterialPageRoute(builder: (context) => ScheduleInfo()));
+}
+
+void _navigateToPolls(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => PollsDemo()));
 }
 
 void _navigateToGallery(BuildContext context) {
@@ -118,7 +124,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.poll_rounded),
             title: Text('Polls'),
-            onTap: () => null,
+            onTap: () => {_navigateToPolls(context)},
           ),
           ListTile(
             leading: Icon(Icons.people),

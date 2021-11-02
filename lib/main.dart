@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:version1_0/view/SplashPage.dart';
 import 'package:version1_0/view/login_page.dart';
-// import 'package:version1_0/view/SplashPage.dart'
 import 'package:version1_0/view/navBar.dart';
 import 'package:version1_0/view/user_preferences.dart';
 // import 'package:version1_0/models/event_model.dart';
@@ -53,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('USP Events'),
       ),
-      body: Text('home'),
+      body: Text('Homepage'),
     );
   }
 }

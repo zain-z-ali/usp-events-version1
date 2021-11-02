@@ -59,6 +59,7 @@ class _ForgotPassword extends State<ForgotPassword> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
+      // ignore: deprecated_member_use
       child: RaisedButton(
           elevation: 5,
           onPressed: () => {

@@ -108,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
         )
       ],
     );
-    ;
   }
 
   Widget buildRememberCb() {
@@ -142,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
+      // ignore: deprecated_member_use
       child: RaisedButton(
           elevation: 5,
           onPressed: () {
@@ -173,12 +173,12 @@ class _LoginPageState extends State<LoginPage> {
         onTap: () {},
         child: Container(
           alignment: Alignment.centerRight,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () => {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => ForgotPassword()))
             },
-            padding: EdgeInsets.only(right: 0),
+            // padding: EdgeInsets.only(right: 0),
             child: Text(
               'Forgot Password?',
               style:

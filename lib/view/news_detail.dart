@@ -11,7 +11,7 @@ class NewsDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("News Info"),
+          title: Text("In Detail"),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -19,7 +19,7 @@ class NewsDetail extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Card(
-                  color: Colors.lightBlue[50],
+                  color: Colors.teal[50],
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -27,14 +27,14 @@ class NewsDetail extends StatelessWidget {
                         title: Text("News Title"),
                         subtitle: Text(news.newsName),
                       ),
-                     /*  ListTile(
+                      ListTile(
                         title: Text("Details"),
                         subtitle: Text(
-                            "Description: ${news.newsDescription} \nKeywords: ${news.newsKeyword} "),
-                      ), */
+                          "URL : ${news.newsDescription}"),
+                      ), 
                       ListTile(
-                        title: Text("More Info"),
-                        subtitle: Text(news.newsContent),
+                        title: Text("Images:"),
+                        subtitle: Image.network(news.newsContent),
                       ),
                     ],
                   ),
@@ -42,6 +42,7 @@ class NewsDetail extends StatelessWidget {
               ],
             ),
           ),
-        ));
+        )
+      );
   }
 }

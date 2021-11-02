@@ -12,7 +12,7 @@ class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("News Info"),
+        title: Text("At A Glance"),
         automaticallyImplyLeading: false, // removes back button
       ),
       body: FutureBuilder(
@@ -28,7 +28,7 @@ class NewsPage extends StatelessWidget {
                         child: ListTile(
                           title: Text(news.newsName),
                           subtitle: Text(
-                              '${news.newsDescription} \nContent ${news.newsContent}'),
+                              '${news.newsDescription} \nUpdated At: \n${news.newsTime.replaceRange(10, 27, "")}'),
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => NewsDetail(
