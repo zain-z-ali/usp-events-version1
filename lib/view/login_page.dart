@@ -1,7 +1,10 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:version1_0/main.dart';
-import 'package:version1_0/view/ForgotPassword.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:version1_0/main.dart';
 import 'package:version1_0/view/SIgnUp.dart';
 // import 'package:version1_0/main.dart';
 // import 'package:version1_0/view/events.da5rt';
@@ -14,7 +17,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // form key
   final formkey = GlobalKey<FormState>();
+
+  //editing controller
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+  //firebase
+  final _auth = FirebaseAuth.instance;
+
   bool isRememberMe = false;
 
   Widget buildEmail() {
@@ -50,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 prefixIcon: Icon(Icons.email, color: Color(0xff31aecb)),
                 hintText: 'Email/Username',
                 hintStyle: TextStyle(color: Colors.black38)),
-            validator: (String? value) {
+            validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter an email';
               }
@@ -60,6 +72,10 @@ class _LoginPageState extends State<LoginPage> {
               }
               return null;
             },
+            onSaved: (value) {
+              emailController.text = value!;
+            },
+            textInputAction: TextInputAction.next,
           ),
         )
       ],
@@ -99,60 +115,35 @@ class _LoginPageState extends State<LoginPage> {
                 prefixIcon: Icon(Icons.lock, color: Color(0xff31aecb)),
                 hintText: 'Password',
                 hintStyle: TextStyle(color: Colors.black38)),
-            validator: (String? value) {
-              if (value!.length < 4) {
-                return 'Password must be atleast 4 characters';
+            validator: (value) {
+              RegExp regex = new RegExp(r'^.{6,}$');
+              if (value!.isEmpty) {
+                return 'Password is required for login';
+              }
+              if (!regex.hasMatch(value)) {
+                return 'Please Enter a Valid Password';
               }
             },
+            onSaved: (value) {
+              passwordController.text = value!;
+            },
+            textInputAction: TextInputAction.done,
           ),
         )
       ],
-    );
-    ;
-  }
-
-  Widget buildRememberCb() {
-    return Container(
-      height: 25,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: isRememberMe,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  isRememberMe = value!;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Remeber Me',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          )
-        ],
-      ),
     );
   }
 
   Widget buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
+      padding: EdgeInsets.symmetric(vertical: 35),
       width: double.infinity,
       child: RaisedButton(
           elevation: 5,
-          onPressed: () {
-            if (formkey.currentState!.validate()) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()));
-
-              return;
-            } else {
-              print("UnSuccessfull");
-            }
+          onPressed: () async {
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+            setState(() {});
           },
           padding: EdgeInsets.all(15),
           shape:
@@ -168,26 +159,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget buildForgetPasswordBtn() {
-    return GestureDetector(
-        onTap: () {},
-        child: Container(
-          alignment: Alignment.centerRight,
-          child: FlatButton(
-            onPressed: () => {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ForgotPassword()))
-            },
-            padding: EdgeInsets.only(right: 0),
-            child: Text(
-              'Forgot Password?',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ));
-  }
-
   Widget buildSignUpBtn() {
     return GestureDetector(
       onTap: () => {
@@ -199,13 +170,13 @@ class _LoginPageState extends State<LoginPage> {
           TextSpan(
               text: 'Don\'t have an Account? ',
               style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w500,
                   fontSize: 18,
                   color: Colors.white)),
           TextSpan(
               text: 'Sign Up',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold))
         ]),
@@ -254,8 +225,6 @@ class _LoginPageState extends State<LoginPage> {
                           buildEmail(),
                           SizedBox(height: 40),
                           buildPassword(),
-                          buildForgetPasswordBtn(),
-                          buildRememberCb(),
                           buildLoginBtn(),
                           buildSignUpBtn()
                         ],
