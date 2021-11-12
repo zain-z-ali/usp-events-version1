@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:version1_0/models/event_model.dart';
 import 'package:version1_0/services/httpService_events.dart';
 import 'package:version1_0/view/events.dart';
+import 'package:version1_0/view/messages.dart';
 import 'package:version1_0/view/navBar.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -31,18 +32,39 @@ class _EventInfoState extends State<EventInfo> {
         body: FutureBuilder<Event>(
           future: httpService.getSpecificEvents(),
           builder: (BuildContext context, AsyncSnapshot<Event> snapshot) {
-            if (snapshot.hasData) {
+            if (globalEventId == 0) {
+              return NoEventSelected();
+            } else if (snapshot.hasData) {
               Event? events = snapshot.data;
               return SingleChildScrollView(
                 child: Card(
-                  color: Colors.lightBlue[50],
+                  //color: Colors.lightBlue[50],
+                  elevation: 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      ListTile(
+                      Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://images.unsplash.com/photo-1528731708534-816fe59f90cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWluaW1hbCUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
+                              fit: BoxFit.fitWidth,
+                              alignment: Alignment.topCenter,
+                            ),
+                            //shape: BoxShape.circle,
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(events!.eventName,
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.bold)),
+                          )),
+                      /* ListTile(
                         title: Text("Event Name"),
-                        subtitle: Text(events!.eventName),
-                      ),
+                        subtitle: Text(events.eventName),
+                      ),*/
                       ListTile(
                         title: Text("Details"),
                         subtitle: Text(
@@ -56,26 +78,31 @@ class _EventInfoState extends State<EventInfo> {
                         height: 15.0,
                       ),
                       Container(
-                        child: FlutterSwitch(
-                          width: 35.0,
-                          height: 18.0,
-                          valueFontSize: 12.0,
-                          toggleSize: 16.0,
-                          value: status,
-                          borderRadius: 20.0,
-                          padding: 2.0,
-                          showOnOff: false,
-                          activeColor: Colors.lightGreen,
-                          onToggle: (val) {
-                            setState(() {
-                              status = val;
-                            });
-                          },
-                        ),
-                      ),
-                      Text(
-                        'Subscribe to event',
-                        //style: TextStyle(color: Colors.black, fontSize: 20.0),
+                        child: Row(children: [
+                          Container(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Subscribe to event',
+                              //style: TextStyle(color: Colors.black, fontSize: 20.0),
+                            ),
+                          ),
+                          FlutterSwitch(
+                            width: 35.0,
+                            height: 18.0,
+                            valueFontSize: 12.0,
+                            toggleSize: 16.0,
+                            value: status,
+                            borderRadius: 20.0,
+                            padding: 2.0,
+                            showOnOff: false,
+                            activeColor: Colors.lightGreen,
+                            onToggle: (val) {
+                              setState(() {
+                                status = val;
+                              });
+                            },
+                          ),
+                        ]),
                       ),
                       SizedBox(
                         height: 15.0,

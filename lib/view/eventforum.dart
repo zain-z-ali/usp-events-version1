@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
+import 'package:version1_0/models/theme_model.dart';
+//import 'package:version1_0/services/httpService_theme.dart';
+import 'package:version1_0/view/events.dart';
+import 'package:version1_0/view/messages.dart';
+import 'package:version1_0/view/navBar.dart';
+import '../services/httpService_eventForum.dart';
+import 'package:version1_0/models/eventForum_message_model.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 const String defaultUserName = "John Doe";
 
+/*
 class EventForum extends StatefulWidget {
   @override
   State createState() => new ChatWindow();
@@ -162,9 +171,29 @@ class Msg extends StatelessWidget {
     );
   }
 }
+*/
+/* HEEEEEERRRREEEE
+class EventForumMessages {
+  var ForumPostArr1 = [
+    new ForumPostEntry("User8", "2 Days ago",
+        "Hello,\n magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    new ForumPostEntry("User2", "23 Hours ago",
+        "Pellentesque justo metus,  semper vitae. Suspendisse neque nisl, vestibulum non dui in, vulputate placerat elit. Sed at convallis mauris, eu blandit dolor. Vivamus suscipit iaculis erat eu condimentum. "),
+    new ForumPostEntry("User3", "2 Days ago",
+        "Lorem ipsum dolor sit amet,   olore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    new ForumPostEntry("User4", "2 Days ago",
+        "Lorem ipsum dolor sit amet,  dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+  ];
+  /* Msg mesg = new Msg(
+      txt: "aaaaahhhh",
+      animationController: new AnimationController(
+          vsync: this, duration: new Duration(milliseconds: 800)),
+    );
+    _messages.insert(0, mesg);*/
+  //_messages.insert(0, "msg");
+}
 
-/*
-var ForumPostArr = [
+/*var ForumPostArr = [
   new ForumPostEntry("User8", "2 Days ago",
       "Hello,\n magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   new ForumPostEntry("User2", "23 Hours ago",
@@ -173,7 +202,7 @@ var ForumPostArr = [
       "Lorem ipsum dolor sit amet,   olore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   new ForumPostEntry("User4", "2 Days ago",
       "Lorem ipsum dolor sit amet,  dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-];
+];*/
 
 class EventForum extends StatefulWidget {
   @override
@@ -184,6 +213,8 @@ class _ForumDetailPageState extends State<EventForum>
     with TickerProviderStateMixin {
   final List<Msg> _messages = <Msg>[];
   final TextEditingController _textController = new TextEditingController();
+  List<ForumPostEntry> ForumPostArr = new EventForumMessages().ForumPostArr1;
+  //List<ForumPostEntry> ForumPostArr = ForumPostArr2.ForumPostArr1;
 
   bool _isWriting = false;
   @override
@@ -293,13 +324,24 @@ class _ForumDetailPageState extends State<EventForum>
     msg.animationController.forward();
   }
 
-  void _getAllMsg() {
-    Msg mesg = new Msg(
+  List<ForumPostEntry> _getAllMsg() {
+    var thisForumPostArr = [
+      new ForumPostEntry("User8", "2 Days ago",
+          "Hello,\n magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+      new ForumPostEntry("User2", "23 Hours ago",
+          "Pellentesque justo metus,  semper vitae. Suspendisse neque nisl, vestibulum non dui in, vulputate placerat elit. Sed at convallis mauris, eu blandit dolor. Vivamus suscipit iaculis erat eu condimentum. "),
+      new ForumPostEntry("User3", "2 Days ago",
+          "Lorem ipsum dolor sit amet,   olore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+      new ForumPostEntry("User4", "2 Days ago",
+          "Lorem ipsum dolor sit amet,  dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    ];
+    return thisForumPostArr;
+    /* Msg mesg = new Msg(
       txt: "aaaaahhhh",
       animationController: new AnimationController(
           vsync: this, duration: new Duration(milliseconds: 800)),
     );
-    _messages.insert(0, mesg);
+    _messages.insert(0, mesg);*/
     //_messages.insert(0, "msg");
   }
 
@@ -446,5 +488,319 @@ class Msg extends StatelessWidget {
       ),
     );
   }
+}*/
+
+/*void _navigateToThemeDetails(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => ThemeDetails());
+}*/
+
+class EventForum extends StatefulWidget {
+  @override
+  _EventForumState createState() => _EventForumState();
 }
+
+class _EventForumState extends State<EventForum> {
+  final HttpService_eventForum httpService = HttpService_eventForum();
+  final messageController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    messageController.addListener(_printLatestValue);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
+    messageController.dispose();
+    super.dispose();
+  }
+
+  void _printLatestValue() {
+    print('Second text field: ${messageController.text}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    BorderRadiusGeometry radius = BorderRadius.only(
+      topLeft: Radius.circular(24.0),
+      topRight: Radius.circular(24.0),
+    );
+    return Scaffold(
+      drawer: NavBar(),
+      appBar: AppBar(
+        title: Text("Event Forum"),
+      ),
+      /*floatingActionButton: FloatingActionButton(
+        // second FAB to perform increment
+        onPressed: () {
+          createAlertDialog(context).then((onValue) {
+            // print(onValue);
+          });
+        },
+        child: Icon(Icons.message_rounded),
+      ),*/
+      body: SlidingUpPanel(
+        panel: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text('Enter your message:\n\n\n'),
+                TextField(
+                  keyboardType: TextInputType.multiline,
+                  minLines: 1,
+                  maxLines: 3,
+                  controller: messageController,
+                ),
+                /*Icon(
+                  Icons.send_rounded,
+                  color: Colors.blueGrey,
+                  size: 30.0,
+                ),*/
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Post to Forum'),
+                ),
+                Text(
+                    '\n\n\n*Please be courteous to other participants and keep your discussion relevant to the event.'),
+              ],
+            ),
+          ),
+        ),
+        collapsed: Container(
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            borderRadius: radius,
+          ),
+          child: Center(
+            child: Text(
+              "Post a forum message",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+        borderRadius: radius,
+        ///////////////////////////////
+        body: FutureBuilder(
+          future: httpService.getEventForum(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<EventMessage>> snapshot) {
+            if (globalEventId == 0) {
+              return NoEventSelected();
+            } /*else if (!snapshot.hasData) {
+            return ThemesNotAdded();
+          }*/
+            else if (snapshot.hasData) {
+              List<EventMessage>? messages = snapshot.data;
+              return Container(
+                //height: 300,
+                child: ListView(
+                  children: messages!
+                      .map(
+                        (EventMessage message) => Card(
+                          color: Colors.lightBlue[50],
+                          elevation: 5,
+                          child: Column(
+                            children: [
+                              Container(
+
+                                  //height: 40,
+                                  //width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                        width: 1.0,
+                                        color: Colors.blueGrey.shade700,
+                                        style: BorderStyle.solid,
+                                      ),
+                                      top: BorderSide(
+                                        width: 1.0,
+                                        color: Colors.blueGrey.shade700,
+                                        style: BorderStyle.solid,
+                                      ),
+                                      right: BorderSide(
+                                        width: 1.0,
+                                        color: Colors.blueGrey.shade700,
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    /*image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://th.bing.com/th/id/OIP.MUiC49P6E2QaeyZ9IYO4ZQHaEK?w=304&h=180&c=7&r=0&o=5&pid=1.7'),
+                                  fit: BoxFit.fitWidth,
+                                  alignment: Alignment.topCenter,
+                                ),*/
+                                    //shape: BoxShape.circle,
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: ListTile(
+                                      title: Text('${message.text}',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          )),
+                                      subtitle: Text("User ${message.userID}"),
+                                    ),
+                                  )),
+                              Container(
+                                  height: 20,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          'https://images.unsplash.com/photo-1528731708534-816fe59f90cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWluaW1hbCUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
+                                      fit: BoxFit.fitWidth,
+                                      alignment: Alignment.topCenter,
+                                    ),
+                                    //shape: BoxShape.circle,
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                        'User ${message.userID}, ${message.time}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        )),
+                                  )),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+/*
+
+class EventForum extends StatefulWidget {
+  @override
+  _EventsForumPageState createState() => _EventsForumPageState();
+}
+
+class _EventsForumPageState extends State<EventForum> {
+  final HttpService_eventForum httpService = HttpService_eventForum();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: NavBar(),
+      appBar: AppBar(
+        title: Text("Themes"),
+      ),
+      body: FutureBuilder(
+        future: httpService.getEventForum(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<EventMessage>> snapshot) {
+          if (globalEventId == 0) {
+            return NoEventSelected();
+          } else if (!snapshot.hasData) {
+            return ThemesNotAdded();
+          } else if (snapshot.hasData) {
+            List<EventMessage>? messages = snapshot.data;
+            return ListView(
+              children: messages!
+                  .map(
+                    (EventMessage message) => Card(
+                      color: Colors.lightBlue[50],
+                      elevation: 5,
+                      child: Column(
+                        children: [
+                          Container(
+                              //height: 40,
+                              //width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://images.unsplash.com/photo-1528731708534-816fe59f90cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWluaW1hbCUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
+                                  fit: BoxFit.fitWidth,
+                                  alignment: Alignment.topCenter,
+                                ),
+                                //shape: BoxShape.circle,
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: ListTile(
+                                  title: Text(message.text,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold)),
+                                  subtitle: Text("User ${message.userID}"),
+                                ),
+                              )),
+                          /* ListTile(
+                            /*leading: CircleAvatar(
+                        child: ClipOval(
+                          child: Image.network(
+                            //'assets\images\generic_user.png',
+                            'https://static.vecteezy.com/system/resources/thumbnails/000/550/731/small/user_icon_004.jpg',
+                            width: 90,
+                            height: 90,
+                            fit: BoxFit
+                                .cover, //makes the image cover the whole circle
+                          ),
+                        ),
+                      ),*/
+                            title: Text(theme.themeName),
+                            subtitle: Text("Theme ${theme.themeID}"),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ThemeDetail(
+                                  theme: theme,
+                                ),
+                              ),
+                            ),
+                          ),*/
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
+  }
+}
+
+
+///////////////////////
+///  Future<String> createAlertDialog(BuildContext context) async {
+    //Dialogue box for entering message
+    TextEditingController customController = new TextEditingController();
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Enter Message"),
+            content: TextField(
+              controller: customController,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                  elevation: 5.0,
+                  child: Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop(customController.text
+                        .toString()); // to go back to screen after submitting
+                  })
+            ],
+          );
+        });
+  }
 */

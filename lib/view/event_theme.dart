@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:version1_0/view/events.dart';
+import 'package:version1_0/view/messages.dart';
 import 'package:version1_0/view/theme_details.dart';
 import '../services/httpService_theme.dart';
 import 'package:version1_0/models/theme_model.dart';
@@ -24,13 +26,51 @@ class EventsThemePage extends StatelessWidget {
         future: httpService.getEventThemes(),
         builder:
             (BuildContext context, AsyncSnapshot<List<ThemeModel>> snapshot) {
-          if (snapshot.hasData) {
+          if (globalEventId == 0) {
+            return NoEventSelected();
+          } else if (!snapshot.hasData) {
+            return ThemesNotAdded();
+          } else if (snapshot.hasData) {
             List<ThemeModel>? themes = snapshot.data;
             return ListView(
               children: themes!
                   .map(
-                    (ThemeModel theme) => ListTile(
-                      /*leading: CircleAvatar(
+                    (ThemeModel theme) => Card(
+                      color: Colors.lightBlue[50],
+                      elevation: 5,
+                      child: Column(
+                        children: [
+                          Container(
+                              //height: 40,
+                              //width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://images.unsplash.com/photo-1528731708534-816fe59f90cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWluaW1hbCUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
+                                  fit: BoxFit.fitWidth,
+                                  alignment: Alignment.topCenter,
+                                ),
+                                //shape: BoxShape.circle,
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: ListTile(
+                                  title: Text(theme.themeName,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold)),
+                                  subtitle: Text("Theme ${theme.themeID}"),
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ThemeDetail(
+                                        theme: theme,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )),
+                          /* ListTile(
+                            /*leading: CircleAvatar(
                         child: ClipOval(
                           child: Image.network(
                             //'assets\images\generic_user.png',
@@ -42,14 +82,17 @@ class EventsThemePage extends StatelessWidget {
                           ),
                         ),
                       ),*/
-                      title: Text(theme.themeName),
-                      subtitle: Text("Theme ${theme.themeID}"),
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ThemeDetail(
-                            theme: theme,
-                          ),
-                        ),
+                            title: Text(theme.themeName),
+                            subtitle: Text("Theme ${theme.themeID}"),
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ThemeDetail(
+                                  theme: theme,
+                                ),
+                              ),
+                            ),
+                          ),*/
+                        ],
                       ),
                     ),
                   )

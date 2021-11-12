@@ -6,6 +6,12 @@ import 'package:version1_0/view/event_theme.dart';
 import 'package:version1_0/view/eventforum.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/speaker.dart';
+import 'package:version1_0/view/chatPage.dart';
+
+void _navigateToChatPage(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => ChatPage()));
+}
 
 void _navigateToHomePage(BuildContext context) {
   Navigator.of(context)
@@ -74,6 +80,11 @@ class NavBar extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('Homepage | Switch Event'),
             onTap: () => {_navigateToHomePage(context)},
+          ),
+          ListTile(
+            leading: Icon(Icons.message_rounded),
+            title: Text('My Chats'),
+            onTap: () => {_navigateToChatPage(context)},
           ),
           Divider(),
           ListTile(

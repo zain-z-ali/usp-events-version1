@@ -23,20 +23,40 @@ class ThemeDetail extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: <Widget>[
                 Card(
+                  elevation: 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      ListTile(
+                      Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://images.unsplash.com/photo-1528731708534-816fe59f90cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWluaW1hbCUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
+                              fit: BoxFit.fitWidth,
+                              alignment: Alignment.topCenter,
+                            ),
+                            //shape: BoxShape.circle,
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(theme.themeName,
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.bold)),
+                          )),
+                      /*ListTile(
                         title: Text("Name"),
                         subtitle: Text(theme.themeName),
-                      ),
+                      ),*/
                       ListTile(
-                        title: Text("Profession/Field"),
-                        subtitle: Text("${theme.themeID}"),
+                        title: Text("Description"),
+                        subtitle: Text(
+                            "${theme.themeID} This is some theme description. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."),
                       ),
                       ListTile(
                         title: Text("Sessions"),
@@ -55,6 +75,9 @@ class ThemeDetail extends StatelessWidget {
                     ],
                   ),
                 ),
+                /*Card(   //create card and display forum below theme details --is infinite currently update to contained
+                  child: ThemeForum(),
+                ),*/
               ],
             ),
           ),
