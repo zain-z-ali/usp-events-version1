@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:version1_0/main.dart';
 import 'package:version1_0/view/ForgotPassword.dart';
-import 'package:version1_0/view/SIgnUp.dart';
-// import 'package:version1_0/main.dart';
-// import 'package:version1_0/view/events.da5rt';
+import 'package:version1_0/view/SignUp.dart';
+
+
 
 class LoginPage extends StatefulWidget {
   //LoginPage({Key? key}) : super(key: key);

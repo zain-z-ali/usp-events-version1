@@ -4,12 +4,14 @@ import 'package:version1_0/view/Gallery.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
 import 'package:version1_0/view/feedback.dart';
+import 'package:version1_0/view/Quiz.dart';
 import 'package:version1_0/view/map.dart';
 import 'package:version1_0/view/newsInfo.dart'; //news info page display
 import 'package:version1_0/view/polls.dart';
 // import 'package:version1_0/view/news.dart';
 import 'package:version1_0/view/speaker.dart';
 //import 'package:version1_0/view/schedule.dart';
+// ignore: unused_import
 import 'package:version1_0/view/scheduleInfo.dart';
 
 
@@ -38,10 +40,11 @@ void _navigateToFeedback(BuildContext context) {
   Navigator.of(context).push(MaterialPageRoute(builder: (context) => UI22()));
 }
 
-void _navigateToScheduleInfo(BuildContext context) {
+void _navigateToQuiz(BuildContext context) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => ScheduleInfo()));
+      .push(MaterialPageRoute(builder: (context) => SubmitQuiz()));
 }
+//change to schedule page
 
 void _navigateToPolls(BuildContext context) {
   Navigator.of(context)
@@ -119,7 +122,12 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.schedule_rounded),
             title: Text('Schedule'),
-            onTap: () => {_navigateToScheduleInfo(context)},
+            onTap: () => null,
+          ),
+          ListTile(
+            leading: Icon(Icons.quiz_rounded),
+            title: Text('Quiz'),
+            onTap: () => {_navigateToQuiz(context)},
           ),
           ListTile(
             leading: Icon(Icons.poll_rounded),

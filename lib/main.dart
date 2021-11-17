@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:version1_0/view/login_page.dart';
@@ -6,8 +7,10 @@ import 'package:version1_0/view/user_preferences.dart';
 // import 'package:version1_0/models/event_model.dart';
 import '../services/httpService_events.dart';
 
-void main() async {
+Future <void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
   await UserPreferences.init();
 
   runApp(MyApp());
