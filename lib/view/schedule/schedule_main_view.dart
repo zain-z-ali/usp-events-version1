@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:provider/provider.dart';
 import 'package:version1_0/models/schedule_model.dart';
+import 'package:version1_0/provider/schedule_notifier.dart';
 import 'package:version1_0/view/schedule/schedule_info_view.dart';
 import 'package:version1_0/widgets/schedule_container_widget.dart';
 
@@ -65,9 +67,12 @@ class _ScheduleMainViewState extends State<ScheduleMainView> {
                   ])),
         ),
       ),
-      body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: _selectedIndex == 0 ? AllScheduleView() : MyScheduleView()),
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: _selectedIndex == 0 ? AllScheduleView() : MyScheduleView()),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -86,5 +91,10 @@ class _ScheduleMainViewState extends State<ScheduleMainView> {
 
       //add another bar below schedule to show date
     );
+  }
+
+  Future<Null> _onRefresh() async {
+    Provider.of<ScheduleNotifier>(context, listen: false).getSchedules();
+    await Future.delayed(Duration(microseconds: 1000));
   }
 }

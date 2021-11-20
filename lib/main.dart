@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:version1_0/provider/schedule_notifier.dart';
 import 'package:version1_0/view/navBar.dart';
 
 //import 'package:version1_0/models/event_model.dart';
@@ -6,7 +9,17 @@ import '../services/httpService_events.dart';
 import 'package:version1_0/view/events.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ScheduleNotifier>(
+            create: (BuildContext context) {
+              return ScheduleNotifier();
+            })
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
