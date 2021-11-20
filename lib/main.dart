@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/view/navBar.dart';
+
 //import 'package:version1_0/models/event_model.dart';
 import '../services/httpService_events.dart';
 import 'package:version1_0/view/events.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
         dividerTheme: DividerThemeData(

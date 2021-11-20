@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/speaker.dart';
-import 'package:version1_0/view/schedule.dart';
-import 'package:version1_0/view/scheduleInfo.dart';
+import 'package:version1_0/view/schedule/schedule_main_view.dart';
 
 void _navigateToEventInfo(BuildContext context) {
   Navigator.of(context)
@@ -17,7 +16,7 @@ void _navigateToSpeakers(BuildContext context) {
 
 void _navigateToScheduleInfo(BuildContext context) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => ScheduleInfo()));
+      .push(MaterialPageRoute(builder: (context) => ScheduleMainView()));
 }
 
 //String profilePic

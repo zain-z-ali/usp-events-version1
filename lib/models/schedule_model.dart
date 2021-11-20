@@ -12,16 +12,18 @@ class ScheduleList {
 }
 
 class Schedule {
-  String? description, time, room, theme;
+  String? name, description, time,date, room, theme;
 
-  Schedule({this.description, this.time, this.room, this.theme});
+  Schedule({this.name,this.date, this.description, this.time, this.room, this.theme});
 
   factory Schedule.fromJson(Map<String, dynamic> json) {
     return Schedule(
-      description: json['id'],
-      time: json['category_name'],
-      room: json['created_at'],
-      theme: json['updated_at'],
+      name: json['name'],
+      description: json['description'],
+      time: json['time'],
+      date: json['date'],
+      room: json['room'],
+      theme: json['theme'],
     );
   }
 }
