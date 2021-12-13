@@ -1,22 +1,23 @@
 
-import 'dart:typed_data';
-
 class Gallery {
   final int imageID;
   final String imageName;
-  final Uint8List image;
+  final String imageDescription;
+  final String imageLink;
 
   Gallery({
     required this.imageID,
     required this.imageName,
-    required this.image,
+    required this.imageDescription,
+    required this.imageLink,
   });
 
   factory Gallery.fromJson(Map<String, dynamic> json) {
     return Gallery(
       imageID: json['image_id'] as int,
       imageName: json['name'] as String,
-      image: json['image'] as Uint8List,
+      imageDescription: json['description'] as String,
+      imageLink: json['link'] as String,
     );
   }
 }

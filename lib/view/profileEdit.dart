@@ -1,15 +1,15 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:path_provider/path_provider.dart';
 import 'package:version1_0/view/profileSetting.dart';
 import 'package:version1_0/widget/textfield_widget.dart';
 import 'package:version1_0/widget/button_widget.dart';
 import 'package:version1_0/view/user_preferences.dart';
 import 'package:version1_0/models/user.dart';
-import 'package:version1_0/widget/profile_widget.dart';
-import 'package:path/path.dart';
+// import 'package:version1_0/widget/profile_widget.dart';
+// import 'package:path/path.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -67,27 +67,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
             padding: EdgeInsets.symmetric(horizontal: 32),
             physics: BouncingScrollPhysics(),
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ProfileWidget(
-                  imagePath: user.imagePath,
-                  isEdit: true,
-                  onClicked: () async {
-                    final image = await ImagePicker()
-                        .getImage(source: ImageSource.gallery);
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: ProfileWidget(
+              //     imagePath: user.imagePath,
+              //     isEdit: true,
+              //     onClicked: () async {
+              //       final image = await ImagePicker()
+              //           .getImage(source: ImageSource.gallery);
 
-                    if (image == null) return;
+              //       if (image == null) return;
 
-                    final directory = await getApplicationDocumentsDirectory();
-                    final name = basename(image.path);
-                    final imageFile = File('${directory.path}/$name');
-                    final newImage =
-                        await File(image.path).copy(imageFile.path);
+              //       final directory = await getApplicationDocumentsDirectory();
+              //       final name = basename(image.path);
+              //       final imageFile = File('${directory.path}/$name');
+              //       final newImage =
+              //           await File(image.path).copy(imageFile.path);
 
-                    setState(() => user = user.copy(imagePath: newImage.path));
-                  },
-                ),
-              ),
+              //       setState(() => user = user.copy(imagePath: newImage.path));
+              //     },
+              //   ),
+              // ),
               const SizedBox(height: 24),
               TextFieldWidget(
                 label: 'Full Name',
