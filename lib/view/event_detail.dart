@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:version1_0/models/event_model.dart';
+import 'package:version1_0/models/subscription_model.dart';
+import 'package:version1_0/services/httpService_subscribedEvent.dart';
+import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/navBar.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 bool status = false;
@@ -16,6 +19,11 @@ class EventDetail extends StatefulWidget {
 }
 
 class _EventDetailState extends State<EventDetail> {
+  final HttpServiceCreateSubscriptionPost httpServicePost =
+      HttpServiceCreateSubscriptionPost();
+  final HttpServiceDeleteEventSubscription httpServiceDelete =
+      HttpServiceDeleteEventSubscription();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,6 +112,30 @@ class _EventDetailState extends State<EventDetail> {
                               setState(() {
                                 status = val;
                               });
+
+                              if (status == true) {
+                                Subscription newSubscription = new Subscription(
+                                  user_id:
+                                      1, ///////////////////change user ID to dynamic with authentication
+                                  event_id: globalEvent.eventID,
+                                  event_subscription: 1,
+                                );
+                                //if (messageGlobalKey.currentState!.validate()) {
+                                httpServicePost.createSubscriptionPost(
+                                    body: newSubscription.toMap());
+                                Fluttertoast.showToast(
+                                    msg: "Event subscription added",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM);
+                              } //end of if
+                              else {
+                                httpServiceDelete.deletePost(
+                                    1, globalEvent.eventID);
+                                Fluttertoast.showToast(
+                                    msg: "Unsubscribed from event",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM);
+                              }
                             },
                           ),
                         ]),

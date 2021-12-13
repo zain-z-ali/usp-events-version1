@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-import 'package:version1_0/models/theme_model.dart';
 //import 'package:version1_0/services/httpService_theme.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/messages.dart';
@@ -502,7 +500,11 @@ class EventForum extends StatefulWidget {
 
 class _EventForumState extends State<EventForum> {
   final HttpService_eventForum httpService = HttpService_eventForum();
+  final HttpService_CreateEventForumPost httpServicePost =
+      HttpService_CreateEventForumPost();
   final messageController = TextEditingController();
+  final formGlobalKey = GlobalKey<FormState>();
+  dynamic currentTime = DateFormat.jm().format(DateTime.now());
 
   @override
   void initState() {
@@ -545,25 +547,71 @@ class _EventForumState extends State<EventForum> {
         child: Icon(Icons.message_rounded),
       ),*/
       body: SlidingUpPanel(
+        backdropEnabled: true,
+        minHeight: 40,
         panel: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
                 Text('Enter your message:\n\n\n'),
-                TextField(
+                /*TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Enter your post message',
+                    errorText: 'Cannot be empty. Please enter a message',
+                  ),
                   keyboardType: TextInputType.multiline,
                   minLines: 1,
                   maxLines: 3,
                   controller: messageController,
+                ),*/
+                Form(
+                  key: formGlobalKey,
+                  child: TextFormField(
+                    controller: messageController,
+                    //textCapitalization: TextCapitalization.words,
+                    showCursor: true,
+                    decoration: InputDecoration(
+                      focusColor: Colors.blue,
+                      hintText: 'Enter your post message',
+                      hintStyle: TextStyle(
+                        fontFamily: 'Quicksand',
+                        fontSize: 14,
+                      ),
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Cannot be empty. Please enter a message';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
+
                 /*Icon(
                   Icons.send_rounded,
                   color: Colors.blueGrey,
                   size: 30.0,
                 ),*/
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    EventMessage newEventMessage = new EventMessage(
+                      eventID: 1,
+                      text: messageController.text,
+                      userID: 1,
+                      time: "",
+                      // time: currentTime,
+                    );
+                    if (formGlobalKey.currentState!.validate()) {
+                      httpServicePost.createEventForumPost(
+                          body: newEventMessage.toMap());
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.greenAccent[400],
+                          content: Text('Your post has been created!')));
+                    }
+                    messageController.clear();
+                    setState(() {});
+                  },
                   child: Text('Post to Forum'),
                 ),
                 Text(
@@ -603,7 +651,7 @@ class _EventForumState extends State<EventForum> {
                   children: messages!
                       .map(
                         (EventMessage message) => Card(
-                          color: Colors.lightBlue[50],
+                          color: Colors.grey[200],
                           elevation: 5,
                           child: Column(
                             children: [
@@ -612,7 +660,7 @@ class _EventForumState extends State<EventForum> {
                                   //height: 40,
                                   //width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
-                                    border: Border(
+                                      /*border: Border(
                                       left: BorderSide(
                                         width: 1.0,
                                         color: Colors.blueGrey.shade700,
@@ -628,15 +676,15 @@ class _EventForumState extends State<EventForum> {
                                         color: Colors.blueGrey.shade700,
                                         style: BorderStyle.solid,
                                       ),
-                                    ),
-                                    /*image: DecorationImage(
+                                    ),*/
+                                      /*image: DecorationImage(
                                   image: NetworkImage(
                                       'https://th.bing.com/th/id/OIP.MUiC49P6E2QaeyZ9IYO4ZQHaEK?w=304&h=180&c=7&r=0&o=5&pid=1.7'),
                                   fit: BoxFit.fitWidth,
                                   alignment: Alignment.topCenter,
                                 ),*/
-                                    //shape: BoxShape.circle,
-                                  ),
+                                      //shape: BoxShape.circle,
+                                      ),
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: ListTile(
@@ -662,7 +710,7 @@ class _EventForumState extends State<EventForum> {
                                   child: Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                        'User ${message.userID}, ${message.time}',
+                                        'User ${message.userID}', //, ${message.time}
                                         style: TextStyle(
                                           fontSize: 14,
                                         )),

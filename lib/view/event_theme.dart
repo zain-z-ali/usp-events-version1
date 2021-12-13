@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:version1_0/view/messages.dart';
-import 'package:version1_0/view/theme_details.dart';
+import 'package:version1_0/view/themeDetails.dart';
 import '../services/httpService_theme.dart';
 import 'package:version1_0/models/theme_model.dart';
 //import 'package:version1_0/view/theme_detail.dart';
-import 'package:version1_0/view/navBar.dart';
 
 /*void _navigateToThemeDetails(BuildContext context) {
   Navigator.of(context)
@@ -18,9 +17,9 @@ class EventsThemePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(),
       appBar: AppBar(
-        title: Text("Themes"),
+        title: Text(globalEvent.eventName),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder(
         future: httpService.getEventThemes(),
@@ -60,9 +59,16 @@ class EventsThemePage extends StatelessWidget {
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold)),
                                   subtitle: Text("Theme ${theme.themeID}"),
-                                  onTap: () => Navigator.of(context).push(
+                                  /*onTap: () => Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => ThemeDetail(
+                                        theme: theme,
+                                      ),
+                                    ),
+                                  ),*/
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ThemeInfo(
                                         theme: theme,
                                       ),
                                     ),

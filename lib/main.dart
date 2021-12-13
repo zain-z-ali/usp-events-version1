@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:dcdg/dcdg.dart';
+import 'package:version1_0/view/myEvents.dart';
+import 'package:version1_0/view/login.dart';
 import 'package:version1_0/view/navBar.dart';
 //import 'package:version1_0/models/event_model.dart';
 import '../services/httpService_events.dart';
 import 'package:version1_0/view/events.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:version1_0/view/chatPage.dart';
+import 'package:firebase_core/firebase_core.dart';
+//import 'package:usp_events_version2/view/splashScreen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(MyApp());
 }
+
+/*void main() {
+  runApp(MyApp());
+}*/
 
 class MyApp extends StatelessWidget {
   @override
@@ -62,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: EventsPage(),
+      //body: LoginScreen(),
     );
   }
 }

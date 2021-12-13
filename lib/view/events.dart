@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/view/event_detail.dart';
 import 'package:version1_0/models/event_model.dart';
+import 'package:version1_0/view/myEvents.dart';
 import '../services/httpService_events.dart';
 
 int globalEventId = 0;
+late Event globalEvent;
+
+void _navigateToMyEvents(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => MyEventsPage()));
+}
 
 class EventsPage extends StatefulWidget {
   @override
@@ -20,7 +27,15 @@ class _EventsPageState extends State<EventsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Upcoming Events"),
-        automaticallyImplyLeading: false, // removes back button
+        automaticallyImplyLeading: false,
+        actions: [
+          Container(
+            child: ElevatedButton(
+              child: Text('My Events'),
+              onPressed: () => {_navigateToMyEvents(context)},
+            ),
+          ),
+        ], // removes back button
       ),
       body: FutureBuilder(
         future: httpService.getEvents(),
@@ -61,6 +76,7 @@ class _EventsPageState extends State<EventsPage> {
                               );
                               setState(() {
                                 globalEventId = event.eventID;
+                                globalEvent = event;
                               });
                             },
                           ),

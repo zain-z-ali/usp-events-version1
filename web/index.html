@@ -27,6 +27,22 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDeShw88y7cEnodmXbWYxRuEBwBuSOLX0w",
+      authDomain: "usp-events.firebaseapp.com",
+      //databaseURL: "https://[YOUR_PROJECT].firebaseio.com",
+      projectId: "usp-events",
+      storageBucket: "usp-events.appspot.com",
+      messagingSenderId: "334571656607",
+      appId: "1:334571656607:web:fea0d5dbd0cc8def4d19aa",
+      measurementId: "G-TDNK36FT0E",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

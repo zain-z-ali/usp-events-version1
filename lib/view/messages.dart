@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/main.dart';
 import '../services/httpService_theme.dart';
-import 'package:version1_0/view/navBar.dart';
 
 void _navigateToHomePage(BuildContext context) {
   Navigator.of(context)

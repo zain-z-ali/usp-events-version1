@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class Speaker {
   final int speakerID;
   final String speakerName;

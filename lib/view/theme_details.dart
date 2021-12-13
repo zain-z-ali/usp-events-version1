@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/models/theme_model.dart';
+import 'package:version1_0/view/events.dart';
 //import 'package:version1_0/view/event_detail.dart';
 //import 'package:version1_0/models/event_model.dart';
-import 'package:version1_0/view/theme_forum.dart';
 //import '../services/httpService_events.dart';
 
-void _navigateToThemeForum(BuildContext context) {
+/*void _navigateToThemeForum(BuildContext context) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => ThemeForum()));
-}
+      .push(MaterialPageRoute(builder: (context) => ThemeForum(required this.theme)));
+}*/
 
 class ThemeDetail extends StatelessWidget {
   final ThemeModel theme;
@@ -19,7 +19,8 @@ class ThemeDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Theme Details"),
+          title: Text(globalEvent.eventName),
+          automaticallyImplyLeading: false,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -62,12 +63,19 @@ class ThemeDetail extends StatelessWidget {
                         title: Text("Sessions"),
                         subtitle: Text("session"),
                       ),
-                      Container(
+                      /*Container(
                         child: ElevatedButton(
                           child: Text('View Forum'),
-                          onPressed: () => {_navigateToThemeForum(context)},
+                          //onPressed: () => {_navigateToThemeForum(context)},
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ThemeForum(
+                                theme: theme,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ),*/
                       /*ListTile(
                         title: Text("About"),
                         subtitle: Text("${speaker.speakerBio}"),

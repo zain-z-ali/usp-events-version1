@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:dcdg/dcdg.dart';
 import 'package:version1_0/main.dart';
 import 'package:version1_0/view/eventInfo.dart'; //event info page display
-import 'package:version1_0/view/eventInfo.dart';
-import 'package:version1_0/view/event_theme.dart';
 import 'package:version1_0/view/eventforum.dart';
-import 'package:version1_0/view/events.dart';
+import 'package:version1_0/view/Session/session.dart';
 import 'package:version1_0/view/speaker.dart';
 import 'package:version1_0/view/chatPage.dart';
+import 'package:version1_0/view/eventThemeHome.dart';
 
 void _navigateToChatPage(BuildContext context) {
   Navigator.of(context)
@@ -16,6 +16,8 @@ void _navigateToChatPage(BuildContext context) {
 void _navigateToHomePage(BuildContext context) {
   Navigator.of(context)
       .push(MaterialPageRoute(builder: (context) => MyHomePage()));
+  /*Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => EventsHome()));*/
 }
 
 void _navigateToEventInfo(BuildContext context) {
@@ -35,7 +37,12 @@ void _navigateToEventForum(BuildContext context) {
 
 void _navigateToEventsThemePage(BuildContext context) {
   Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => EventsThemePage()));
+      .push(MaterialPageRoute(builder: (context) => ThemeHome()));
+}
+
+void _navigateToSessionsPage(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => Session()));
 }
 
 //String profilePic
@@ -110,7 +117,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.schedule_rounded),
             title: Text('Schedule'),
-            onTap: () => null,
+            onTap: () => {_navigateToSessionsPage(context)},
           ),
           ListTile(
             leading: Icon(Icons.poll_rounded),

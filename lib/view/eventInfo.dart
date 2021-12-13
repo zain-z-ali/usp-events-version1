@@ -6,8 +6,9 @@ import 'package:version1_0/view/messages.dart';
 import 'package:version1_0/view/navBar.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
-import 'event_detail.dart';
+//import 'event_detail.dart';
 
+bool status = false;
 /*class EventInfo extends StatefulWidget {
   @override
   _EventInfoState createState() => _EventInfoState();

@@ -28,3 +28,39 @@ class HttpService_eventForum {
     }
   }
 }
+
+class HttpService_CreateEventForumPost {
+  int event_id = globalEventId;
+  String eventForumURL = "http://10.0.2.2:8000/api/event-forum";
+
+  HttpService_CreateEventForumPost() {
+    this.eventForumURL = "http://10.0.2.2:8000/api/event-forum";
+  }
+
+  _setHeaders() => {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      };
+
+  /*Future createEventForumPost({required Map body}) async {
+    return http //gives type cast error
+        .post(Uri.parse(eventForumURL), body: body)
+        .then((http.Response response) {
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400) {
+        throw new Exception("Error while fetching data");
+      }
+      return EventMessage.fromJson(json.decode(response.body));
+    });
+  }*/
+  createEventForumPost({required Map body}) async {
+    try {
+      return await http.post(Uri.parse(eventForumURL),
+          body: jsonEncode(body), headers: _setHeaders());
+    } catch (e) {
+      print(e);
+      return 'could not post';
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/models/chatUsersModel.dart';
+import 'package:version1_0/services/httpService_chat.dart';
 import 'package:version1_0/view/conversationList.dart';
 import 'package:version1_0/view/navBar.dart';
 
@@ -9,7 +10,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<ChatUsers> chatUsers = [
+  final HttpServiceChatList httpService = HttpServiceChatList();
+  /*List<ChatUsers> chatUsers = [
     ChatUsers(
         name: "Jane Russel",
         messageText: "Awesome Setup",
@@ -58,7 +60,10 @@ class _ChatPageState extends State<ChatPage> {
         imageURL:
             "https://th.bing.com/th/id/OIP.ERvuihuZowyj8uOO797b_QHaD5?w=303&h=180&c=7&r=0&o=5&pid=1.7",
         time: "18 Feb"),
-  ];
+  ];*/
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,89 +72,112 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: Text("Messages"),
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Conversations",
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.pink[50],
-                      ),
+      body: FutureBuilder(
+        future: httpService.getChatList(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<ChatUsers>> snapshot) {
+          if (snapshot.hasData) {
+            List<ChatUsers>? chatUsers = snapshot.data;
+            return SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Icon(
-                            Icons.add,
-                            color: Colors.pink,
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
                           Text(
-                            "Add New",
+                            "Conversations",
                             style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                                fontSize: 22, fontWeight: FontWeight.bold),
                           ),
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: 8, right: 8, top: 2, bottom: 2),
+                            height: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.pink[50],
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.add,
+                                  color: Colors.pink,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width: 2,
+                                ),
+                                Text(
+                                  "A Function",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.grey.shade600),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey.shade600,
-                    size: 20,
+                    ),
                   ),
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  contentPadding: EdgeInsets.all(8),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.grey.shade100)),
-                ),
+                  /*Padding(
+                    padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Search...",
+                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.grey.shade600,
+                          size: 20,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
+                        contentPadding: EdgeInsets.all(8),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                BorderSide(color: Colors.grey.shade100)),
+                      ),
+                    ),
+                  ),*/
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    thickness: 2,
+                    indent: 20,
+                    endIndent: 20,
+                    color: Colors.grey.shade300,
+                  ),
+                  ListView.builder(
+                    itemCount: chatUsers!.length,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(top: 16),
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return ConversationList(
+                        name: chatUsers[index].name,
+                        id: chatUsers[index].id,
+                        //imageUrl: chatUsers[index].imageURL,
+                        //time: chatUsers[index].time,
+                        //isMessageRead: (index == 0 || index == 3) ? true : false,
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-            ListView.builder(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.only(top: 16),
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return ConversationList(
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: (index == 0 || index == 3) ? true : false,
-                );
-              },
-            ),
-          ],
-        ),
+            );
+          } // end of if
+          else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

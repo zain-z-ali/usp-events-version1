@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:version1_0/models/speaker_model.dart';
+import 'package:version1_0/view/events.dart';
 
 class SpeakerDetail extends StatelessWidget {
   final Speaker speaker;
@@ -9,8 +10,13 @@ class SpeakerDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Speaker Details"),
+      ),
+      body: Scaffold(
         appBar: AppBar(
-          title: Text("Speaker Details"),
+          title: Text(globalEvent.eventName),
+          automaticallyImplyLeading: false,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -61,6 +67,8 @@ class SpeakerDetail extends StatelessWidget {
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
